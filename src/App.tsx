@@ -26,7 +26,7 @@ export default defineComponent({
 
 
         const handleSelectColor = (e: Event) => {
-            // console.log('debug e', e)
+            pen.setColor(e.target.value)
 
         }
         const handleMouseDownCanvas = (e: MouseEvent) => {
@@ -63,7 +63,7 @@ export default defineComponent({
             graphType.value = type
         }
 
-        const handleClearAll = (type: GraphType) => {
+        const handleClearAll = (e: MouseEvent) => {
             graphList.value = []
             pen.cleanAll()
         }

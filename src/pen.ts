@@ -10,6 +10,7 @@ export class Pen {
     private upEvt!: MouseEvent
     private modelList = new ModelList()
     private currentDrawModel: ModelBase | null = null
+    private color!: string
 
     setPenType(type: GraphType) {
         this.type = type
@@ -53,6 +54,7 @@ export class Pen {
             y: this.moveEvt ? this.moveEvt.offsetY : 0,
             type: this.type,
             status: this.penStatus,
+            color: this.color,
         }
     }
 
@@ -71,6 +73,10 @@ export class Pen {
 
     cleanAll() {
         this.modelList && this.modelList.clear()
+    }
+
+    setColor(color: string) {
+        this.color = color
     }
 }
 

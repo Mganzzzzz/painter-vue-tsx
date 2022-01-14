@@ -6,6 +6,7 @@ export interface PenInfo {
     y: number;
     type: GraphType;
     status: PenStatus,
+    color: string,
 }
 
 export interface SvgBaseProps {
