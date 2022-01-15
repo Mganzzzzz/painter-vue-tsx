@@ -1,12 +1,12 @@
-import {computed, createVNode, defineComponent, h, ref} from "vue";
-import {Drawing, GraphType, MapOf, ModelData} from "./const";
+import {computed, defineComponent, h, ref} from "vue";
+import {GraphType, MapOf, ModelData} from "./const";
 import {SvgLine} from './components'
 
-import {pen} from "./pen";
-import {ModelList} from "./model";
 import './App.scss'
+import useCanvas from "./hooks/canvasHook";
+import useGraphMenu from "./hooks/menuHook";
+import {GraphMenu, GraphMenuProp} from "./components/GraphMenu";
 
-const modelList = new ModelList()
 const GraphComponent: MapOf<any> = {
     [GraphType.line]: SvgLine,
     // [GraphType.rect]: SvgRect,
@@ -20,24 +20,17 @@ export default defineComponent({
     },
 
     setup() {
-        const drawing = ref<Drawing>(Drawing.end);
-        const graphList = ref<ModelData[]>(modelList.toData());
-        const graphType = ref<GraphType>(GraphType.line);
+        const {
+            handlePenMove, handlePenUp, handlePenDown,
+            drawing, graphType, graphList,
+        } = useCanvas()
 
+        const {
+            handleSelectColor,
+            handleChangeShape,
+            handleClearAll,
+        } = useGraphMenu(graphType, graphList)
 
-        const handleSelectColor = (e: Event) => {
-            pen.setColor(e.target.value)
-
-        }
-        const handleMouseDownCanvas = (e: MouseEvent) => {
-            drawing.value = Drawing.start
-            pen.penDown(graphType.value);
-        }
-
-        const handleMouseUpCanvas = (e: MouseEvent) => {
-            drawing.value = Drawing.end
-            pen.penUp(e);
-        }
 
         const renderGraph = (graph: ModelData, index: number) => {
             const comp = GraphComponent[graph.component]
@@ -50,53 +43,31 @@ export default defineComponent({
             </>
         }
 
-        const handleMouseMoveCanvas = (e: MouseEvent) => {
 
-            const dataList = pen.move(e, graphType.value)
-            if (drawing.value === Drawing.start) {
-                graphList.value = dataList
-            }
+        const btnDrawStyles = ref<string>(`draw-line-btn`)
+        const grapMenuProps: GraphMenuProp = {
+            btnDrawStyles,
+            handleChangeShape,
+            handleClearAll,
+            handleSelectColor,
         }
-
-        const handleChangeShape = (type: GraphType) => {
-            pen.setPenType(type)
-            graphType.value = type
-        }
-
-        const handleClearAll = (e: MouseEvent) => {
-            graphList.value = []
-            pen.cleanAll()
-        }
-
-        const btnDrawStyles = computed(() => `draw-line-btn ${String(graphType.value)}`)
-
+        console.log('debug btnDrawStyles.value', btnDrawStyles.value)
         return () => (
-            <div className="App">
-                <div className="header">
-                    <button className={btnDrawStyles.value} onClick={() => handleChangeShape(GraphType.path)}>path
-                    </button>
-                    <button className={btnDrawStyles.value} onClick={() => handleChangeShape(GraphType.rect)}>长方形
-                    </button>
-                    <button className={btnDrawStyles.value} onClick={() => handleChangeShape(GraphType.round)}>圆形
-                    </button>
-                    <button className={btnDrawStyles.value} onClick={() => handleChangeShape(GraphType.ellipse)}>椭圆
-                    </button>
-                    <button className={btnDrawStyles.value} onClick={() => handleChangeShape(GraphType.polygon)}>三角形
-                    </button>
-                    <button className={btnDrawStyles.value} onClick={() => handleChangeShape(GraphType.line)}>路径
-                    </button>
-                    <button className="clear-all-btn" onClick={handleClearAll}>清空</button>
-                    <input type="color" onInput={handleSelectColor}/>
+            <div class="App">
+                <div class="header">
+                    <GraphMenu
+                        {...grapMenuProps}
+                    />
                 </div>
-                <div className="body">
-                    <div className="main">
-                        <div className="left-side">
+                <div class="body">
+                    <div class="main">
+                        <div class="left-side">
                         </div>
                         <div class="right-side">
                             <svg class="canvas"
-                                 onmousedown={handleMouseDownCanvas}
-                                 onmouseup={handleMouseUpCanvas}
-                                 onmousemove={handleMouseMoveCanvas}
+                                 onMousedown={handlePenDown}
+                                 onMouseup={handlePenUp}
+                                 onMousemove={handlePenMove}
                             >
                                 {
                                     graphList.value.map((graph, index) => {
@@ -107,11 +78,11 @@ export default defineComponent({
                         </div>
 
                     </div>
-                    <div className="tool-area">
+                    <div class="tool-area">
 
                     </div>
                 </div>
-                <div className="footer">
+                <div class="footer">
                 </div>
             </div>
         );

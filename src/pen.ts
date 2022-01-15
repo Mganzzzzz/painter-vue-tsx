@@ -10,7 +10,7 @@ export class Pen {
     private upEvt!: MouseEvent
     private modelList = new ModelList()
     private currentDrawModel: ModelBase | null = null
-    private color!: string
+    private color: string = '#000000'
 
     setPenType(type: GraphType) {
         this.type = type
