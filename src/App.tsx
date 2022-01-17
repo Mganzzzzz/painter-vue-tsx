@@ -1,6 +1,6 @@
 import {computed, defineComponent, h, ref} from "vue";
 import {GraphType, MapOf, ModelData} from "./const";
-import {SvgLine} from './components'
+import {SVGLine, SVGtriangle} from './components'
 
 import './App.scss'
 import useCanvas from "./hooks/canvasHook";
@@ -8,17 +8,11 @@ import useGraphMenu from "./hooks/menuHook";
 import {GraphMenu, GraphMenuProp} from "./components/GraphMenu";
 
 const GraphComponent: MapOf<any> = {
-    [GraphType.line]: SvgLine,
-    // [GraphType.rect]: SvgRect,
-    // [GraphType.round]: SvgRound,
-    // [GraphType.path]: SvgPath,
+    [GraphType.line]: SVGLine,
+    [GraphType.triangle]: SVGtriangle,
 }
 
 export default defineComponent({
-    components: {
-        'SvgLine': SvgLine
-    },
-
     setup() {
         const {
             handlePenMove, handlePenUp, handlePenDown,

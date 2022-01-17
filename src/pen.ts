@@ -1,6 +1,7 @@
 import {GraphType, ModelData, PenInfo, PenStatus} from "./const";
 import {ModelBase, ModelList} from "./model";
 import {ModelLine} from "./model/ModelLine";
+import {ModelTriangle} from "./model/ModelTriangle";
 
 
 export class Pen {
@@ -31,6 +32,10 @@ export class Pen {
                 const moveEvt = this.moveEvt as MouseEvent
                 const {offsetX: x, offsetY: y} = moveEvt
                 model = new ModelLine({x, y})
+            } else if (this.type === GraphType.triangle) {
+                const moveEvt = this.moveEvt as MouseEvent
+                const {offsetX: x, offsetY: y} = moveEvt
+                model = new ModelTriangle({x, y})
             }
             if (model) {
                 this.currentDrawModel = model

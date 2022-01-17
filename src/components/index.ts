@@ -1,2 +1,3 @@
 export * from './HelloWorld';
-export * from './svg-line';
+export * from './SVGLine';
+export * from './SVGtriangle';

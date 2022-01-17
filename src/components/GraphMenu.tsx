@@ -30,7 +30,7 @@ export const GraphMenu = defineComponent({
             </button>
             <button class={btnDrawStyles.value} onClick={() => handleChangeShape(GraphType.ellipse)}>椭圆
             </button>
-            <button class={btnDrawStyles.value} onClick={() => handleChangeShape(GraphType.polygon)}>三角形
+            <button class={btnDrawStyles.value} onClick={() => handleChangeShape(GraphType.triangle)}>三角形
             </button>
             <button class={btnDrawStyles.value} onClick={() => handleChangeShape(GraphType.line)}>路径
             </button>

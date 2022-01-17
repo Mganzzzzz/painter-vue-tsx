@@ -10,6 +10,7 @@ export default function useGraphMenu(graphType: Ref<GraphType>, graphList: Ref<M
 
     const handleChangeShape = (type: GraphType) => {
         pen.setPenType(type)
+        console.log('debug type', type)
         graphType.value = type
     }
 
