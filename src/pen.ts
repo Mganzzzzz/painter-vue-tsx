@@ -1,8 +1,8 @@
 import {GraphType, ModelData, PenInfo, PenStatus} from "./const";
+import * as  Models from "./model";
 import {ModelBase, ModelList} from "./model";
-import {ModelLine} from "./model/ModelLine";
-import {ModelTriangle} from "./model/ModelTriangle";
 
+console.log('debug Models', Models)
 
 export class Pen {
     private type: GraphType = GraphType.base
@@ -26,20 +26,18 @@ export class Pen {
         this.type = type
         if (this.penStatus === PenStatus.up) {
             this.penStatus = PenStatus.down
-
-            let model = null
-            if (this.type === GraphType.line) {
-                const moveEvt = this.moveEvt as MouseEvent
-                const {offsetX: x, offsetY: y} = moveEvt
-                model = new ModelLine({x, y})
-            } else if (this.type === GraphType.triangle) {
-                const moveEvt = this.moveEvt as MouseEvent
-                const {offsetX: x, offsetY: y} = moveEvt
-                model = new ModelTriangle({x, y})
-            }
-            if (model) {
-                this.currentDrawModel = model
-                this.modelList.add(model)
+            const classes: any[] = Object.values(Models)
+            for (const cls of classes) {
+                let {type: t} = cls
+                if (t as GraphType) {
+                    if (t === type) {
+                        console.log('debug t', t)
+                        const model = cls.withPenModel(this)
+                        console.log('debug model', model)
+                        this.currentDrawModel = model
+                        this.modelList.add(model)
+                    }
+                }
             }
         }
     }

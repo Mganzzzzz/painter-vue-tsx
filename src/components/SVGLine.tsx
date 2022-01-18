@@ -1,9 +1,14 @@
 import {defineComponent, toRefs} from "vue";
-import {ModelData, SvgBaseProps} from "../const";
+import {ModelData, SvgBaseProps, SvgLineProps, SvgTriangleProps} from "../const";
+
+interface IProps  {
+    data: SvgLineProps
+}
 
 export const SVGLine = defineComponent({
-    setup(props) {
-        return () => <line {...props}/>
+    setup(props:IProps) {
+        const {data} = toRefs(props)
+        return () => <line {...props.data}/>
     }
 })
 

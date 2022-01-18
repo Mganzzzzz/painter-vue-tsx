@@ -1,18 +1,18 @@
 import {ModelBase} from "./ModelBase";
-import {ModelData, PenInfo, SvgLineProps} from "../const";
+import {GraphType, ModelData, PenInfo, SvgLineProps} from "../const";
 import {Pen} from "../pen";
 
 export class ModelLine extends ModelBase {
+    static type: GraphType = GraphType.line
     private startX: number = 0
     private startY: number = 0
     private endX: number = 0
     private endY: number = 0
-    private color: string = '#000000'
 
-    constructor({x, y}: { x: number, y: number }) {
-        super();
-        this.startX = x
-        this.startY = y
+    constructor(penInfo: PenInfo) {
+        super(penInfo);
+        this.startX = penInfo.x
+        this.startY = penInfo.y
     }
 
     toData(): ModelData {

@@ -32,7 +32,7 @@ export default defineComponent({
                 {
                     h(comp, {
                         key: index,
-                        ...graph.props
+                        ... graph.props
                     })}
             </>
         }

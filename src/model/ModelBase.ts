@@ -1,13 +1,18 @@
-import {ModelData} from "../const";
+import {GraphType, ModelData, PenInfo} from "../const";
 import {Pen} from "../pen";
 
 export class ModelBase {
+    static type: GraphType
+
     protected color: string = '#000000'
 
 
-    static withPenModel(pen: Pen): BaseModel {
-        const {svg} = pen.toData()
-        return new this(svg)
+    constructor(penInfo: PenInfo) {
+    }
+
+    static withPenModel(pen: Pen): ModelBase {
+        const penInfo = pen.getPenInfo()
+        return new this(penInfo)
     }
 
     toData(): ModelData {

@@ -22,12 +22,13 @@ export interface SvgLineProps extends SvgBaseProps {
     y2: number,
 }
 export interface SvgTriangleProps extends SvgBaseProps {
-    x1: number,
-    x2: number,
-    y1: number,
-    y2: number,
-    x3: number,
-    y3: number,
+    points: number[]
+    // x1: number,
+    // x2: number,
+    // y1: number,
+    // y2: number,
+    // x3: number,
+    // y3: number,
 }
 
 

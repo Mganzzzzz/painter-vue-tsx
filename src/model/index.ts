@@ -1,2 +1,5 @@
 export * from './ModelBase'
+export * from './ModelPoint'
+export * from './ModelLine'
+export * from './ModelTriangle'
 export * from './ModelList'
