@@ -1,5 +1,10 @@
 import {GraphType, PenStatus} from './enum';
+import {DefineComponent} from "vue";
 
+export interface Point {
+    x: number;
+    y: number;
+}
 
 export interface PenInfo {
     x: number;
@@ -7,6 +12,7 @@ export interface PenInfo {
     type: GraphType;
     status: PenStatus,
     color: string,
+    point?: Point;
 }
 
 export interface SvgBaseProps {
@@ -16,23 +22,31 @@ export interface SvgBaseProps {
 }
 
 export interface SvgLineProps extends SvgBaseProps {
-    x1: number,
-    x2: number,
-    y1: number,
-    y2: number,
+    x1: number;
+    x2: number;
+    y1: number;
+    y2: number;
 }
+
 export interface SvgTriangleProps extends SvgBaseProps {
-    points: number[]
-    // x1: number,
-    // x2: number,
-    // y1: number,
-    // y2: number,
-    // x3: number,
-    // y3: number,
+    points: string
+}
+
+export interface SvgRectProps extends SvgBaseProps {
+    x: number;
+    y: number;
+    height: number;
+    width: number;
+}
+
+export interface SvgPointProps extends SvgBaseProps {
+    x: number;
+    y: number;
 }
 
 
 export interface ModelData {
-    component: string,
+    component: any,
     props: SvgBaseProps
 }
+

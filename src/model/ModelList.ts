@@ -1,7 +1,5 @@
 import {GraphType, ModelData} from "../const";
 import {ModelBase} from "./ModelBase";
-import {Pen, pen} from "../pen";
-import {ModelLine} from "./ModelLine";
 
 export class ModelList {
     private list: ModelBase[] = [];

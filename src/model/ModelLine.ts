@@ -1,4 +1,5 @@
 import {ModelBase} from "./ModelBase";
+import {SVGLine} from "../components";
 import {GraphType, ModelData, PenInfo, SvgLineProps} from "../const";
 import {Pen} from "../pen";
 
@@ -8,6 +9,7 @@ export class ModelLine extends ModelBase {
     private startY: number = 0
     private endX: number = 0
     private endY: number = 0
+    protected component= SVGLine
 
     constructor(penInfo: PenInfo) {
         super(penInfo);
@@ -23,7 +25,7 @@ export class ModelLine extends ModelBase {
         }
 
         return {
-            component: 'line',
+            component: this.component,
             props,
         };
     }

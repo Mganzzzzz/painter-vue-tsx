@@ -1,14 +1,9 @@
-import {defineComponent, toRefs} from "vue";
-import {ModelData, SvgBaseProps, SvgLineProps, SvgTriangleProps} from "../const";
+import {defineComponent, markRaw} from "vue";
 
-interface IProps  {
-    data: SvgLineProps
-}
-
-export const SVGLine = defineComponent({
-    setup(props:IProps) {
-        const {data} = toRefs(props)
-        return () => <line {...props.data}/>
+export const SVGLine = markRaw({
+    name: "Line",
+    setup(props) {
+        return () => <line />
     }
 })
 

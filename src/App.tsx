@@ -1,16 +1,11 @@
 import {computed, defineComponent, h, ref} from "vue";
 import {GraphType, MapOf, ModelData} from "./const";
-import {SVGLine, SVGtriangle} from './components'
+import { SVGTriangle} from './components'
 
 import './App.scss'
 import useCanvas from "./hooks/canvasHook";
 import useGraphMenu from "./hooks/menuHook";
 import {GraphMenu, GraphMenuProp} from "./components/GraphMenu";
-
-const GraphComponent: MapOf<any> = {
-    [GraphType.line]: SVGLine,
-    [GraphType.triangle]: SVGtriangle,
-}
 
 export default defineComponent({
     setup() {
@@ -27,10 +22,9 @@ export default defineComponent({
 
 
         const renderGraph = (graph: ModelData, index: number) => {
-            const comp = GraphComponent[graph.component]
             return <>
                 {
-                    h(comp, {
+                    h(graph.component, {
                         key: index,
                         ... graph.props
                     })}
@@ -45,9 +39,10 @@ export default defineComponent({
             handleClearAll,
             handleSelectColor,
         }
-        console.log('debug btnDrawStyles.value', btnDrawStyles.value)
+
         return () => (
             <div class="App">
+                {graphType.value}
                 <div class="header">
                     <GraphMenu
                         {...grapMenuProps}

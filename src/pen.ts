@@ -1,6 +1,6 @@
 import {GraphType, ModelData, PenInfo, PenStatus} from "./const";
 import * as  Models from "./model";
-import {ModelBase, ModelList} from "./model";
+import {ModelBase, ModelList, PointModel} from "./model";
 
 console.log('debug Models', Models)
 
@@ -12,6 +12,7 @@ export class Pen {
     private modelList = new ModelList()
     private currentDrawModel: ModelBase | null = null
     private color: string = '#000000'
+    private currentPoint: PointModel | undefined
 
     setPenType(type: GraphType) {
         this.type = type
@@ -31,9 +32,7 @@ export class Pen {
                 let {type: t} = cls
                 if (t as GraphType) {
                     if (t === type) {
-                        console.log('debug t', t)
                         const model = cls.withPenModel(this)
-                        console.log('debug model', model)
                         this.currentDrawModel = model
                         this.modelList.add(model)
                     }
@@ -52,12 +51,13 @@ export class Pen {
     }
 
     getPenInfo(): PenInfo {
+        const point = this.currentPoint?.toData()
         return {
             x: this.moveEvt ? this.moveEvt.offsetX : 0,
             y: this.moveEvt ? this.moveEvt.offsetY : 0,
-            type: this.type,
             status: this.penStatus,
             color: this.color,
+            type: this.type,
         }
     }
 
@@ -67,6 +67,7 @@ export class Pen {
 
     move(e: MouseEvent, type: GraphType): ModelData[] {
         this.moveEvt = e
+        this.currentPoint = PointModel.withPenModel(this)
         if (this.penStatus === PenStatus.down) {
             this.draw(type)
         }
