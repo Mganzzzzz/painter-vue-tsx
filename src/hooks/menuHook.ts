@@ -10,7 +10,6 @@ export default function useGraphMenu(graphType: Ref<GraphType>, graphList: Ref<M
 
     const handleChangeShape = (type: GraphType) => {
         pen.setPenType(type)
-        console.log('debug type', type)
         graphType.value = type
     }
 
@@ -19,9 +18,15 @@ export default function useGraphMenu(graphType: Ref<GraphType>, graphList: Ref<M
         pen.cleanAll()
     }
 
+    const handleChangeStrokeWidth = (e:Event) => {
+        const v = (<HTMLInputElement>e.target).value
+        pen.setPenStrokeWith(v)
+    }
+
     return {
         handleSelectColor,
         handleChangeShape,
         handleClearAll,
+        handleChangeStrokeWidth,
     }
 }

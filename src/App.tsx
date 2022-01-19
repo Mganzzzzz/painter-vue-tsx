@@ -1,6 +1,6 @@
 import {computed, defineComponent, h, ref} from "vue";
 import {GraphType, MapOf, ModelData} from "./const";
-import { SVGTriangle} from './components'
+import {SVGLine, SVGTriangle} from './components'
 
 import './App.scss'
 import useCanvas from "./hooks/canvasHook";
@@ -18,6 +18,7 @@ export default defineComponent({
             handleSelectColor,
             handleChangeShape,
             handleClearAll,
+            handleChangeStrokeWidth,
         } = useGraphMenu(graphType, graphList)
 
 
@@ -38,6 +39,7 @@ export default defineComponent({
             handleChangeShape,
             handleClearAll,
             handleSelectColor,
+            handleChangeStrokeWidth,
         }
 
         return () => (

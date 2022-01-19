@@ -49,14 +49,14 @@ export class Rect extends ModelBase {
         const {x, y} = this.start
         const {height, width} = this
         const props: SvgRectProps = {
-            fill: "transparent",
-            stroke: this.pen.color, strokeWidth: "12",
             x, y, height, width
         }
-        return {
-            component: this.component,
-            props,
-        };
+
+
+        const base = super.toData()
+
+        base.props = {...base.props, ...props}
+        return base
     }
 
 

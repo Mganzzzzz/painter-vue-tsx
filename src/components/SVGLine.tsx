@@ -1,9 +1,9 @@
 import {defineComponent, markRaw} from "vue";
 
-export const SVGLine = markRaw({
+export const SVGLine = defineComponent({
     name: "Line",
     setup(props) {
-        return () => <line />
+        return () => <line {...props}/>
     }
 })
 

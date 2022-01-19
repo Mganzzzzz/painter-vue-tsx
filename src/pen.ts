@@ -12,10 +12,15 @@ export class Pen {
     private modelList = new ModelList()
     private currentDrawModel: ModelBase | null = null
     private color: string = '#000000'
+    private strokeWith: string = '3'
     private currentPoint: PointModel | undefined
 
     setPenType(type: GraphType) {
         this.type = type
+    }
+
+    setPenStrokeWith(v:string) {
+        this.strokeWith = v
     }
 
     isPenDown(): boolean {
@@ -58,6 +63,7 @@ export class Pen {
             status: this.penStatus,
             color: this.color,
             type: this.type,
+            strokeWith: this.strokeWith
         }
     }
 

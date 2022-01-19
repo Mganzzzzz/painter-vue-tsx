@@ -1,9 +1,11 @@
 import {ModelBase} from "./ModelBase";
-import {GraphType, ModelData, PenInfo, SvgTriangleProps, Point} from "../const";
+import {GraphType, ModelData, PenInfo, SvgTriangleProps, Point, SvgLineProps} from "../const";
 import {Pen} from "../pen";
 import {cos, sin} from "../common/utils";
 import {PointModel} from "./PointModel";
 import {SVGTriangle} from "../components";
+
+console.log('debug SVGTriangle', SVGTriangle)
 
 export class Triangle extends ModelBase {
     static type: GraphType = GraphType.triangle
@@ -63,16 +65,14 @@ export class Triangle extends ModelBase {
             const {x, y} = n
             return `${x} ${y}`
         }).join(',')
+
+        const base = super.toData()
         const props: SvgTriangleProps = {
-            fill: "transparent",
-            stroke: this.pen.color, strokeWidth: "12",
             points,
         }
 
-        return {
-            component: this.component,
-            props,
-        };
+        base.props = {...base.props, ...props}
+        return base
     }
 
 

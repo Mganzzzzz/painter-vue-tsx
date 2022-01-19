@@ -21,8 +21,12 @@ export class ModelBase {
 
     toData(): ModelData {
         return {
-            component: '',
-            props: {}
+            component: this.component,
+            props: {
+                fill: "transparent",
+                stroke: this.pen.color,
+                'stroke-width': this.pen.strokeWith,
+            }
         }
     }
 

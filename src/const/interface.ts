@@ -13,12 +13,13 @@ export interface PenInfo {
     status: PenStatus,
     color: string,
     point?: Point;
+    strokeWith: string
 }
 
 export interface SvgBaseProps {
     stroke?: string;
     fill?: string;
-    strokeWidth?: string;
+    'stroke-width'?: string;
 }
 
 export interface SvgLineProps extends SvgBaseProps {
