@@ -1,13 +1,8 @@
 import {ModelBase} from "./ModelBase";
 import {GraphType, ModelData, PenInfo, SvgTriangleProps, Point, SvgLineProps} from "../const";
 import {Pen} from "../pen";
-import {cos, sin} from "../common/utils";
-import {PointModel} from "./PointModel";
-import {SVGTriangle} from "../components";
 
-console.log('debug SVGTriangle', SVGTriangle)
-
-export class Triangle extends ModelBase {
+export class ModelTriangle extends ModelBase {
     static type: GraphType = GraphType.triangle
 
     private r: number = 0
@@ -15,7 +10,7 @@ export class Triangle extends ModelBase {
     private p1!: Point
     private p2!: Point
     private p3!: Point
-    protected component = SVGTriangle
+    protected component = GraphType.triangle
 
     constructor(penInfo: PenInfo) {
         super(penInfo);

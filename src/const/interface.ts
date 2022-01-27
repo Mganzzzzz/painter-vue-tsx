@@ -1,5 +1,4 @@
 import {GraphType, PenStatus} from './enum';
-import {DefineComponent} from "vue";
 
 export interface Point {
     x: number;
@@ -20,6 +19,7 @@ export interface SvgBaseProps {
     stroke?: string;
     fill?: string;
     'stroke-width'?: string;
+    [key: string]: any,
 }
 
 export interface SvgLineProps extends SvgBaseProps {
@@ -27,6 +27,10 @@ export interface SvgLineProps extends SvgBaseProps {
     x2: number;
     y1: number;
     y2: number;
+}
+
+export interface SvgPathProps extends SvgBaseProps {
+    points: string
 }
 
 export interface SvgTriangleProps extends SvgBaseProps {

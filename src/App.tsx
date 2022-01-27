@@ -1,17 +1,15 @@
 import {computed, defineComponent, h, ref} from "vue";
-import {GraphType, MapOf, ModelData} from "./const";
-import {SVGLine, SVGTriangle} from './components'
-
 import './App.scss'
 import useCanvas from "./hooks/canvasHook";
 import useGraphMenu from "./hooks/menuHook";
 import {GraphMenu, GraphMenuProp} from "./components/GraphMenu";
+import {renderGraph} from "./components/dymanicComponent";
 
 export default defineComponent({
     setup() {
         const {
             handlePenMove, handlePenUp, handlePenDown,
-            drawing, graphType, graphList,
+            graphType, graphList,
         } = useCanvas()
 
         const {
@@ -20,17 +18,6 @@ export default defineComponent({
             handleClearAll,
             handleChangeStrokeWidth,
         } = useGraphMenu(graphType, graphList)
-
-
-        const renderGraph = (graph: ModelData, index: number) => {
-            return <>
-                {
-                    h(graph.component, {
-                        key: index,
-                        ... graph.props
-                    })}
-            </>
-        }
 
 
         const btnDrawStyles = ref<string>(`draw-line-btn`)
@@ -60,6 +47,7 @@ export default defineComponent({
                                  onMouseup={handlePenUp}
                                  onMousemove={handlePenMove}
                             >
+
                                 {
                                     graphList.value.map((graph, index) => {
                                         return renderGraph(graph, index);

@@ -1,17 +1,15 @@
 import {ModelBase} from "./ModelBase";
 import {GraphType, ModelData, PenInfo, SvgTriangleProps, Point, SvgRectProps} from "../const";
 import {Pen} from "../pen";
-import {cos, sin} from "../common/utils";
-import {PointModel} from "./PointModel";
-import {SVGRect} from "../components";
 
-export class Rect extends ModelBase {
+
+export class ModelRect extends ModelBase {
     static type: GraphType = GraphType.rect
 
     private start: Point
     private height!: number
     private width!: number
-    protected component = SVGRect
+    protected component = GraphType.rect
 
 
     constructor(penInfo: PenInfo) {
@@ -48,14 +46,11 @@ export class Rect extends ModelBase {
     toData(): ModelData {
         const {x, y} = this.start
         const {height, width} = this
-        const props: SvgRectProps = {
-            x, y, height, width
-        }
-
-
         const base = super.toData()
-
-        base.props = {...base.props, ...props}
+        base.props= {
+            x, y, height, width,
+            ...base.props,
+        }
         return base
     }
 
