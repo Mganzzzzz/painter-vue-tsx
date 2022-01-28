@@ -1,5 +1,6 @@
 html, body, #root, .App, .body {
   height: 100%;
+  background: #bfbfbf;
 }
 .App {
   .header {
@@ -13,7 +14,8 @@ html, body, #root, .App, .body {
   }
   .body {
     display: flex;
-    width: 100%;
+    //width: 100%;
+    max-width: 800px;
     background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACAQMAAABIeJ9nAAAABlBMVEW9vb3///8EwsWUAAAADElEQVQI12NoYHAAAAHEAMFJRSpJAAAAAElFTkSuQmCC) repeat;
     .main {
       display: flex;

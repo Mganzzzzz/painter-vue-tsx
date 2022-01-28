@@ -12,20 +12,19 @@ export default function useCanvas() {
     const handlePenUp = (e: MouseEvent) => {
         drawing.value = Drawing.end
         // pen.penUp(e);
-        const command = CommandPenUP.commandWithPen(pen, e)
-        command.execute(e)
+        const command = new CommandPenUP(pen, e)
+        command.execute()
     }
     const handlePenDown = (e: MouseEvent) => {
         drawing.value = Drawing.start
-        const command = CommandPenDown.commandWithPen(pen, e)
+        const command = new CommandPenDown(pen, graphType.value)
         command.execute()
-        // pen.penDown(graphType.value);
     }
 
     const handlePenMove = (e: MouseEvent) => {
-        const command = CommandPenMove.commandWithPen(pen, e)
-        const dataList = command.execute()
-        // const dataList = pen.move(e, graphType.value)
+        const command = new CommandPenMove(pen, e, graphType.value)
+        command.execute()
+        const dataList = pen.toData()
         if (drawing.value === Drawing.start) {
             graphList.value = dataList
         }

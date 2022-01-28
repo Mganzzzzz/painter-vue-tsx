@@ -9,7 +9,7 @@ export class ModelPath extends ModelBase {
     private path: Point[] = []
     private height!: number
     private width!: number
-    private command: Command
+    private start: Point
     protected component = GraphType.path
 
 

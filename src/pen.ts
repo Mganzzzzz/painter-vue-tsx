@@ -19,7 +19,7 @@ export class Pen {
         this.type = type
     }
 
-    setPenStrokeWith(v:string) {
+    setPenStrokeWith(v: string) {
         this.strokeWith = v
     }
 
@@ -46,9 +46,8 @@ export class Pen {
         }
     }
 
-    penUp(e: MouseEvent): void {
+    penUp(e?: MouseEvent): void {
         if (this.penStatus === PenStatus.down) {
-            this.upEvt = e
             this.penStatus = PenStatus.up
             this.currentDrawModel && this.currentDrawModel.update(this)
             this.currentDrawModel = null
@@ -71,14 +70,24 @@ export class Pen {
         this.currentDrawModel && this.currentDrawModel.update(this)
     }
 
-    move(e: MouseEvent, type: GraphType): ModelData[] {
+    move(e: MouseEvent, type: GraphType) {
         this.moveEvt = e
         this.currentPoint = PointModel.withPenModel(this)
         if (this.penStatus === PenStatus.down) {
             this.draw(type)
         }
-        const ret = this.modelList.toData()
-        return ret
+    }
+
+    erase() {
+
+    }
+
+    toData() {
+        return this.modelList.toData()
+    }
+
+    getModelList() {
+        return this.modelList.getList()
     }
 
     cleanAll() {

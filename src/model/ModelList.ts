@@ -2,15 +2,19 @@ import {GraphType, ModelData} from "../const";
 import {ModelBase} from "./ModelBase";
 
 export class ModelList {
-    private list: ModelBase[] = [];
+    private _list: ModelBase[] = [];
     // private pen: Pen = pen;
 
     toData(): ModelData[] {
-        return this.list.map(g => g.toData())
+        return this._list.map(g => g.toData())
     }
 
 
-    // startDraw(type: GraphType): void {
+    get list(): ModelBase[] {
+        return this._list;
+    }
+
+// startDraw(type: GraphType): void {
     //     const model = this.pen.draw(type)
     //     this.list.push(model)
     // }
@@ -23,14 +27,14 @@ export class ModelList {
 
 
     add(model: ModelBase) {
-        this.list.push(model)
+        this._list.push(model)
     }
 
     clear() {
-        this.list = []
+        this._list = []
     }
 
     getList():ModelBase[] {
-        return this.list
+        return this._list
     }
 }
