@@ -1,8 +1,8 @@
 import {GraphType, ModelData, PenInfo, PenStatus} from "./const";
 import * as  Models from "./model";
 import {ModelBase, ModelList, PointModel} from "./model";
+import Command from "./command/Command";
 
-console.log('debug Models', Models)
 
 export class Pen {
     private type: GraphType = GraphType.base
@@ -78,8 +78,9 @@ export class Pen {
         }
     }
 
-    erase() {
-
+    undo() {
+        const command = Command.commandsQueue.top() as Command
+        command && command.undo()
     }
 
     toData() {
@@ -87,7 +88,12 @@ export class Pen {
     }
 
     getModelList() {
-        return this.modelList.getList()
+        return this.modelList.list
+    }
+
+
+    setModelList(list: ModelBase[]) {
+        this.modelList.list = list
     }
 
     cleanAll() {

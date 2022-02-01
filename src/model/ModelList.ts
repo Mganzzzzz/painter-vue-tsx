@@ -2,7 +2,9 @@ import {GraphType, ModelData} from "../const";
 import {ModelBase} from "./ModelBase";
 
 export class ModelList {
+
     private _list: ModelBase[] = [];
+
     // private pen: Pen = pen;
 
     toData(): ModelData[] {
@@ -12,6 +14,10 @@ export class ModelList {
 
     get list(): ModelBase[] {
         return this._list;
+    }
+
+    set list(value: ModelBase[]) {
+        this._list = value;
     }
 
 // startDraw(type: GraphType): void {
@@ -32,9 +38,5 @@ export class ModelList {
 
     clear() {
         this._list = []
-    }
-
-    getList():ModelBase[] {
-        return this._list
     }
 }

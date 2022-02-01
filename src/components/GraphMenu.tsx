@@ -7,6 +7,7 @@ export type GraphMenuProp = {
     handleClearAll: (e: MouseEvent) => void;
     handleSelectColor: (e: Event) => void;
     handleChangeStrokeWidth: (e: Event) => void;
+    handleUndo: (e: Event) => void;
 
 }
 export const GraphMenu = defineComponent({
@@ -16,6 +17,7 @@ export const GraphMenu = defineComponent({
         'handleClearAll',
         'handleSelectColor',
         'handleChangeStrokeWidth',
+        'handleUndo',
     ],
     setup(props: GraphMenuProp) {
         const {btnDrawStyles} = toRefs(props)
@@ -23,9 +25,7 @@ export const GraphMenu = defineComponent({
         const handleClearAll = props.handleClearAll
         const handleSelectColor = props.handleSelectColor
         const handleChangeStrokeWidth = props.handleChangeStrokeWidth
-        // const handleChangeStrokeWidth = (e) => {
-        //     console.log('debug e', e)
-        // }
+        const handleUndo = props.handleUndo
 
         return () => <div>
             <button class={btnDrawStyles.value} onClick={() => handleChangeShape(GraphType.path)}>path
@@ -40,6 +40,7 @@ export const GraphMenu = defineComponent({
             </button>
             <button class={btnDrawStyles.value} onClick={() => handleChangeShape(GraphType.line)}>路径
             </button>
+            <button class="clear-all-btn" onClick={handleUndo}>undo</button>
             <button class="clear-all-btn" onClick={handleClearAll}>清空</button>
             <input type="color" onInput={handleSelectColor}/>
             <input type="range" onChange={handleChangeStrokeWidth}/>

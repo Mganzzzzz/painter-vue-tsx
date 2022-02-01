@@ -18,9 +18,14 @@ export default function useGraphMenu(graphType: Ref<GraphType>, graphList: Ref<M
         pen.cleanAll()
     }
 
-    const handleChangeStrokeWidth = (e:Event) => {
+    const handleChangeStrokeWidth = (e: Event) => {
         const v = (<HTMLInputElement>e.target).value
         pen.setPenStrokeWith(v)
+    }
+
+    const handleUndo = (e: Event) => {
+        pen.undo()
+        graphList.value = pen.toData()
     }
 
     return {
@@ -28,5 +33,6 @@ export default function useGraphMenu(graphType: Ref<GraphType>, graphList: Ref<M
         handleChangeShape,
         handleClearAll,
         handleChangeStrokeWidth,
+        handleUndo,
     }
 }

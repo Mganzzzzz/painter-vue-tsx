@@ -11,7 +11,6 @@ export default function useCanvas() {
 
     const handlePenUp = (e: MouseEvent) => {
         drawing.value = Drawing.end
-        // pen.penUp(e);
         const command = new CommandPenUP(pen, e)
         command.execute()
     }

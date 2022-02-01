@@ -17,6 +17,7 @@ export default defineComponent({
             handleChangeShape,
             handleClearAll,
             handleChangeStrokeWidth,
+            handleUndo,
         } = useGraphMenu(graphType, graphList)
 
 
@@ -27,6 +28,7 @@ export default defineComponent({
             handleClearAll,
             handleSelectColor,
             handleChangeStrokeWidth,
+            handleUndo,
         }
 
         return () => (

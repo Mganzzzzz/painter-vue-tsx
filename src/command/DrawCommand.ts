@@ -1,8 +1,9 @@
 import {Pen} from "../pen";
-import CommandPen from "./CommandPen";
+import Command from "./Command";
 import {GraphType, ModelData} from "../const";
+import {log} from "../common/utils";
 
-export class CommandPenDown extends CommandPen {
+export class CommandPenDown extends Command {
 
     private type: GraphType
     protected pen: Pen
@@ -14,19 +15,23 @@ export class CommandPenDown extends CommandPen {
     }
 
     execute() {
+
+        this.snapshot = this.pen.getModelList().slice()
+        CommandPenUP.commandsQueue.enqueue(this)
+
         this.pen.penDown(this.type);
-        this.snapshot = this.pen.getModelList()
-        CommandPenDown.commandsQueue.enqueue(this)
         return this.pen
     }
 
     undo(): void {
-        CommandPenDown.commandsQueue.dequeue()
-        // this.pen.penUp()
+        const cmd = CommandPenDown.commandsQueue.dequeue()
+        if (cmd) {
+            this.pen.setModelList(cmd.snapshot)
+        }
     }
 }
 
-export class CommandPenUP extends CommandPen {
+export class CommandPenUP extends Command {
     // private type: GraphType
     protected pen: Pen
     protected event: MouseEvent
@@ -39,18 +44,16 @@ export class CommandPenUP extends CommandPen {
 
     execute() {
         this.pen.penUp(this.event)
-        this.snapshot = this.pen.getModelList()
-        CommandPenUP.commandsQueue.enqueue(this)
         return this.pen
     }
 
     undo(): void {
-        CommandPenDown.commandsQueue.dequeue()
-        // this.pen.penDown()
+
+
     }
 }
 
-export class CommandPenMove extends CommandPen {
+export class CommandPenMove extends Command {
     private type: GraphType
     protected pen: Pen
     protected event: MouseEvent
@@ -64,11 +67,8 @@ export class CommandPenMove extends CommandPen {
 
     execute() {
         this.pen.move(this.event, this.type)
-        this.snapshot = this.pen.getModelList()
-        CommandPenMove.commandsQueue.enqueue(this)
     }
 
     undo(): void {
-        CommandPenDown.commandsQueue.dequeue()
     }
 }
