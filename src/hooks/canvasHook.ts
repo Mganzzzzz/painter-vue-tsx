@@ -1,28 +1,31 @@
 import {ref} from 'vue'
 import {Drawing, GraphType, ModelData} from "../const";
 import {pen} from "../pen";
-import {CommandPenMove, CommandPenUP, CommandPenDown} from "../command/DrawCommand";
+import CommandDraw from "../command/CommandDraw";
 
 export default function useCanvas() {
 
     const drawing = ref<Drawing>(Drawing.end);
     const graphList = ref<ModelData[]>([]);
     const graphType = ref<GraphType>(GraphType.line);
+    let command: CommandDraw | null
+
+    const handlePenDown = (e: MouseEvent) => {
+        drawing.value = Drawing.start
+        command = new CommandDraw(pen, e, graphType.value)
+        command && command.startDraw()
+    }
+
 
     const handlePenUp = (e: MouseEvent) => {
         drawing.value = Drawing.end
-        const command = new CommandPenUP(pen, e)
-        command.execute()
-    }
-    const handlePenDown = (e: MouseEvent) => {
-        drawing.value = Drawing.start
-        const command = new CommandPenDown(pen, graphType.value)
-        command.execute()
+        command && command.stopDraw()
     }
 
+
     const handlePenMove = (e: MouseEvent) => {
-        const command = new CommandPenMove(pen, e, graphType.value)
-        command.execute()
+        pen.move(e, graphType.value)
+        command && command.drawing(e)
         const dataList = pen.toData()
         if (drawing.value === Drawing.start) {
             graphList.value = dataList

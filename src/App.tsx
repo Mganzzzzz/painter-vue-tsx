@@ -12,28 +12,10 @@ export default defineComponent({
             graphType, graphList,
         } = useCanvas()
 
-        const {
-            handleSelectColor,
-            handleChangeShape,
-            handleClearAll,
-            handleChangeStrokeWidth,
-            handleUndo,
-        } = useGraphMenu(graphType, graphList)
-
-
-        const btnDrawStyles = ref<string>(`draw-line-btn`)
-        const grapMenuProps: GraphMenuProp = {
-            btnDrawStyles,
-            handleChangeShape,
-            handleClearAll,
-            handleSelectColor,
-            handleChangeStrokeWidth,
-            handleUndo,
-        }
+        const grapMenuProps: GraphMenuProp = useGraphMenu(graphType, graphList)
 
         return () => (
             <div class="App">
-                {graphType.value}
                 <div class="header">
                     <GraphMenu
                         {...grapMenuProps}
@@ -49,7 +31,6 @@ export default defineComponent({
                                  onMouseup={handlePenUp}
                                  onMousemove={handlePenMove}
                             >
-
                                 {
                                     graphList.value.map((graph, index) => {
                                         return renderGraph(graph, index);

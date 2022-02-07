@@ -1,5 +1,10 @@
 import {GraphType, PenStatus} from './enum';
 
+export interface MapOf<T> {
+    [key: string]: T;
+}
+
+
 export interface Point {
     x: number;
     y: number;
@@ -19,6 +24,7 @@ export interface SvgBaseProps {
     stroke?: string;
     fill?: string;
     'stroke-width'?: string;
+
     [key: string]: any,
 }
 
@@ -32,6 +38,7 @@ export interface SvgLineProps extends SvgBaseProps {
 export interface SvgPathProps extends SvgBaseProps {
     points: string
 }
+
 
 export interface SvgTriangleProps extends SvgBaseProps {
     points: string

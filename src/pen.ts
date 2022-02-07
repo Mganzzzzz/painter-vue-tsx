@@ -79,8 +79,13 @@ export class Pen {
     }
 
     undo() {
-        const command = Command.commandsQueue.top() as Command
+        const command = Command.commandsQueue.dequeue() as Command
         command && command.undo()
+    }
+
+    redo() {
+        const command = Command.commandsQueue.requeue() as Command
+        command && command.redo()
     }
 
     toData() {
@@ -97,6 +102,7 @@ export class Pen {
     }
 
     cleanAll() {
+        Command.commandsQueue.clear()
         this.modelList && this.modelList.clear()
     }
 
