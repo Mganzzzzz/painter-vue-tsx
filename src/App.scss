@@ -60,5 +60,11 @@ html, body, #root, .App, .body {
       button.active {
         background-color: cornflowerblue;
       }
+      .redo, .undo {
+        background-color: lightsalmon;
+      }
+      .clear {
+        background-color: red;
+      }
     }
 }

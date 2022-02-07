@@ -28,9 +28,9 @@ export const GraphMenu = defineComponent({
             {grapyTypesArray.value.map(({active, type, label}) => <button
                 class={{active: active}}
                 onClick={() => props.handleChangeShape(type)}>{label}</button>)}
-            <button class="clear-all-btn" onClick={props.handleUndo}>撤销</button>
-            <button class="clear-all-btn" onClick={props.handleRedo}>重做</button>
-            <button class="clear-all-btn" onClick={props.handleClearAll}>清空</button>
+            <button class="undo" onClick={props.handleUndo}>撤销</button>
+            <button class="redo" onClick={props.handleRedo}>重做</button>
+            <button class="clear" onClick={props.handleClearAll}>清空</button>
             <input type="color" onInput={props.handleSelectColor}/>
             <input type="range" value={10} onChange={props.handleChangeStrokeWidth}/>
         </div>
