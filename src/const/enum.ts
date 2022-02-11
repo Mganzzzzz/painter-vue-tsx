@@ -8,6 +8,7 @@ export enum GraphType {
     triangle = 'triangle',
     polygon = 'polygon',
     point = 'point',
+    eraser = 'eraser',
 }
 
 

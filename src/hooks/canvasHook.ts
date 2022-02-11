@@ -1,4 +1,4 @@
-import {ref} from 'vue'
+import {CSSProperties, reactive, ref} from 'vue'
 import {Drawing, GraphType, ModelData} from "../const";
 import {pen} from "../pen";
 import CommandDraw from "../command/CommandDraw";
@@ -6,6 +6,7 @@ import CommandDraw from "../command/CommandDraw";
 export default function useCanvas() {
 
     const drawing = ref<Drawing>(Drawing.end);
+
     const graphList = ref<ModelData[]>([]);
     const graphType = ref<GraphType>(GraphType.line);
     let command: CommandDraw | null
@@ -16,12 +17,15 @@ export default function useCanvas() {
         command && command.startDraw()
     }
 
+    const updateCanvasStyle = () => {
+        const penInfo = pen.getPenInfo()
+        console.log('debug penInfo', penInfo)
+    }
 
     const handlePenUp = (e: MouseEvent) => {
         drawing.value = Drawing.end
         command && command.stopDraw()
     }
-
 
     const handlePenMove = (e: MouseEvent) => {
         pen.move(e, graphType.value)
@@ -34,11 +38,13 @@ export default function useCanvas() {
 
     return {
         drawing,
+        // canvasStyle,
         graphList,
         graphType,
         handlePenUp,
         handlePenDown,
         handlePenMove,
+        updateCanvasStyle,
     }
 }
 

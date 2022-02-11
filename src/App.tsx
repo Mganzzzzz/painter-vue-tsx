@@ -1,18 +1,33 @@
-import {computed, defineComponent, h, ref} from "vue";
+import {defineComponent, reactive, watch} from "vue";
 import './App.scss'
 import useCanvas from "./hooks/canvasHook";
 import useGraphMenu from "./hooks/menuHook";
 import {GraphMenu, GraphMenuProp} from "./components/GraphMenu";
 import {renderGraph} from "./components/dymanicComponent";
+import {GraphType} from "./const";
+import logo from './assets/logo.png'
 
 export default defineComponent({
     setup() {
         const {
             handlePenMove, handlePenUp, handlePenDown,
             graphType, graphList,
+            updateCanvasStyle,
         } = useCanvas()
 
+
         const grapMenuProps: GraphMenuProp = useGraphMenu(graphType, graphList)
+
+        const penStyles = reactive({
+            cursor: `url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAhElEQVR42u3WwQ6AIAwDUPj/j1ZInOkR24KBbDc52Ndx0Fp+npqABCTgGMDV5n1pm6WAHo6Z3TKKkAERDgso8TyC2BuAqw/Al3Ab4AnE8/kAdfV2AF7FdICrvQ3AtqcAzvYSABrT7WUAnFHhFoASLgPUcAngCKcAgLB8ys/5I0pAArYF3BnMjyGREgE3AAAAAElFTkSuQmCC'), crosshair;`,
+        })
+
+        const img = new URL('./assets/logo.png', import.meta.url).href
+        watch(graphType, (cur, prev) => {
+            if(cur === GraphType.eraser) {
+                penStyles.cursor = 'crosshair'
+            }
+        })
 
         return () => (
             <div class="App">
@@ -27,6 +42,7 @@ export default defineComponent({
                         </div>
                         <div class="right-side">
                             <svg class="canvas"
+                                  style={penStyles}
                                  onMousedown={handlePenDown}
                                  onMouseup={handlePenUp}
                                  onMousemove={handlePenMove}

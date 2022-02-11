@@ -3,8 +3,8 @@ import {SvgLineProps} from "../const";
 
 export const SVGLine = defineComponent({
     name: "Line",
-    setup(props: SvgLineProps) {
-        return () => <line {...props}/>
+    setup() {
+        return () => <line />
     }
 })
 

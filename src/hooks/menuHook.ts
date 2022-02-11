@@ -14,7 +14,9 @@ function userGraphTypeMenu() {
         [GraphType.triangle]: '三角形',
         [GraphType.polygon]: '多边形',
         [GraphType.point]: '点',
+        [GraphType.eraser]: '橡皮擦',
     }
+
     const t = Object.entries(GraphType).map(([k, v]) => {
         const label = labelMap[v]
         return {

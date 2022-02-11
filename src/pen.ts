@@ -1,4 +1,4 @@
-import {GraphType, ModelData, PenInfo, PenStatus} from "./const";
+import {GraphType, PenInfo, PenStatus} from "./const";
 import * as  Models from "./model";
 import {ModelBase, ModelList, PointModel} from "./model";
 import Command from "./command/Command";
