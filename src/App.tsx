@@ -6,6 +6,7 @@ import {GraphMenu, GraphMenuProp} from "./components/GraphMenu";
 import {renderGraph} from "./components/dymanicComponent";
 import {GraphType} from "./const";
 import logo from './assets/logo.png'
+import {CanvasPainter} from "./components/CanvasPainter";
 
 export default defineComponent({
     setup() {
@@ -41,8 +42,15 @@ export default defineComponent({
                         <div class="left-side">
                         </div>
                         <div class="right-side">
+                            {/*<CanvasPainter*/}
+                            {/*    graphList={graphList}*/}
+                            {/*    penStyles={penStyles}*/}
+                            {/*    handlePenDown={handlePenDown}*/}
+                            {/*    handlePenUp={handlePenUp}*/}
+                            {/*    handlePenMove={handlePenMove}*/}
+                            {/*/>*/}
                             <svg class="canvas"
-                                  style={penStyles}
+                                style={penStyles}
                                  onMousedown={handlePenDown}
                                  onMouseup={handlePenUp}
                                  onMousemove={handlePenMove}

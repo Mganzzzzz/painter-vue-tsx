@@ -1,11 +1,13 @@
-import {defineComponent, toRefs, markRaw} from "vue";
-import {ModelData, SvgBaseProps, SvgLineProps, SvgTriangleProps} from "../const";
+import {defineComponent,} from "vue";
+import {SvgTriangleProps,} from "../const";
 
-export const SVGTriangle = markRaw({
-    name: "triangle",
-    setup(props: SvgTriangleProps) {
-        return () => <polyline {...props}/>
+interface Props {
+    $attrs: SvgTriangleProps
+}
+
+
+export const SVGTriangle = defineComponent(function SVGTriangle() {
+    return (props: Props) => {
+        return <polyline {...props.$attrs} />
     }
 })
-
-

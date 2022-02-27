@@ -38,7 +38,6 @@ export default function useCanvas() {
 
     return {
         drawing,
-        // canvasStyle,
         graphList,
         graphType,
         handlePenUp,

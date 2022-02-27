@@ -1,11 +1,16 @@
-import {defineComponent, markRaw} from "vue";
+import {defineComponent} from "vue";
 import {SvgLineProps} from "../const";
 
-export const SVGLine = defineComponent({
-    name: "Line",
-    setup() {
-        return () => <line />
+interface Props {
+    $attrs: SvgLineProps
+}
+
+export const SVGLine = defineComponent(function SVGLine() {
+    return (props: Props) => {
+        const {$attrs} = props
+        return <line {...$attrs}/>
     }
 })
+
 
 

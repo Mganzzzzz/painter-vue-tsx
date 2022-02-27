@@ -1,11 +1,13 @@
-import {defineComponent, markRaw} from "vue";
-import {SvgRectProps} from "../const";
+import {defineComponent,} from "vue";
+import {SvgPathProps,} from "../const";
 
-export const SVGRect = markRaw({
-    name: "Rect",
-    setup(props: SvgRectProps) {
-        return () => <rect {...props} />
+interface Props {
+    $attrs: SvgPathProps
+}
+
+
+export const SVGRect = defineComponent(function SVGRect() {
+    return (props: Props) => {
+        return <rect {...props.$attrs} />
     }
 })
-
-

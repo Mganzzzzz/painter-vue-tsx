@@ -1,11 +1,13 @@
 import {defineComponent, markRaw} from "vue";
 import {SvgPathProps} from "../const";
 
-export const SVGEraser = markRaw({
-    name: "Eraser",
-    setup(props: SvgPathProps) {
-        return () => <polyline />
+interface Props {
+    $attrs:SvgPathProps
+}
+
+export const SVGEraser = defineComponent(function SVGEraser() {
+    return (props: Props) => {
+        const {$attrs} = props
+        return <polyline {...$attrs}/>
     }
 })
-
-

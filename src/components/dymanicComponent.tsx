@@ -1,5 +1,4 @@
 import {GraphType, MapOf, ModelData} from "../const";
-import _ from 'lodash';
 import {h} from "vue";
 import {SVGLine, SVGPath, SVGRect, SVGTriangle} from "./index";
 import {SVGEraser} from "./SVGEraser";

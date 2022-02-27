@@ -12,6 +12,7 @@ export type GraphMenuProp = {
 }
 
 export const GraphMenu = defineComponent({
+    name: 'GraphMenu',
     props: [
         'grapyTypesArray',
         'handleChangeShape',
