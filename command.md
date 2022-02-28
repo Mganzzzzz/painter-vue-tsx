@@ -12,23 +12,23 @@
 
    配置输入：根据不同的图形配置不同的配置参数，当使用鼠标在画板上面画画的时候，取出不同图形的配置然后执行画图回调函数进行渲染， 缺点就是使用过多的if分支判断。
 
-   ![image-20220227222054316](/Users/mac/Library/Application Support/typora-user-images/image-20220227222054316.png)
+   ![image-20220227222054316](./doc/image-20220227222054316.png)
 
 2. V2
 
    命令输入:  在画笔回调事件与画笔引用、事件引用、图形类型之间增加一层中间层， 我们可以让画笔控制画板中的不同的图形类型进行渲染。这一层中间层就是Command类。在这种情况我们只需要关心怎么生产Command对象即可。
 
-   ![image-20220227222343345](/Users/mac/Library/Application Support/typora-user-images/image-20220227222343345.png)
+   ![image-20220227222343345](./doc/image-20220227222343345.png)
 
 3. V3
 
    利用单例模式实现一个命令流，并在其之上实现调度接口。一部分的类只管产生一系类的命令存入这个流中。另外一些类只负责消费这个队列。通过这一层数据流则达到了直接解耦消费者和生产者的目的。
 
-   ![image-20220227222126692](/Users/mac/Library/Application Support/typora-user-images/image-20220227222126692.png)
+   ![image-20220227222126692](./doc/image-20220227222126692.png)
 
    并且在调度器之上我们可以做掉撤销和重做功能，同时这也是命令模式的常用使用场景，使用命令模式做到这一个易如反掌。
 
-   ![image-20220227222138977](/Users/mac/Library/Application Support/typora-user-images/image-20220227222138977.png)
+   ![image-20220227222138977](./doc/image-20220227222138977.png)
 
 4. V-next
 
