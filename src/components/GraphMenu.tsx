@@ -9,6 +9,7 @@ export type GraphMenuProp = {
     handleChangeStrokeWidth: (e: Event) => void;
     handleUndo: (e: Event) => void;
     handleRedo: (e: Event) => void;
+    startLineCursor: (e: Event) => void;
 }
 
 export const GraphMenu = defineComponent({
@@ -21,6 +22,7 @@ export const GraphMenu = defineComponent({
         'handleChangeStrokeWidth',
         'handleUndo',
         'handleRedo',
+        'startLineCursor',
     ],
     setup(props: GraphMenuProp) {
         const {grapyTypesArray} = toRefs(props)
@@ -32,6 +34,7 @@ export const GraphMenu = defineComponent({
             <button class="undo" onClick={props.handleUndo}>撤销</button>
             <button class="redo" onClick={props.handleRedo}>重做</button>
             <button class="clear" onClick={props.handleClearAll}>清空</button>
+            <button class="record" onClick={props.startLineCursor}>帮助</button>
             <input type="color" onInput={props.handleSelectColor}/>
             <input type="range" value={10} onChange={props.handleChangeStrokeWidth}/>
         </div>

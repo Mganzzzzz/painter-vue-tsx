@@ -11,13 +11,14 @@ export interface Point {
 }
 
 export interface PenInfo {
+    show: boolean;
     x: number;
     y: number;
     type: GraphType;
     status: PenStatus,
-    color: string,
+    color: string;
     point?: Point;
-    strokeWith: string
+    strokeWith: string;
 }
 
 export interface SvgBaseProps {
@@ -60,5 +61,11 @@ export interface SvgPointProps extends SvgBaseProps {
 export interface ModelData {
     component: any,
     props: SvgBaseProps
+}
+
+
+export interface ModelCursorPenData {
+    x: number,
+    y: number,
 }
 

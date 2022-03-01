@@ -19,7 +19,6 @@ export default function useCanvas() {
 
     const updateCanvasStyle = () => {
         const penInfo = pen.getPenInfo()
-        console.log('debug penInfo', penInfo)
     }
 
     const handlePenUp = (e: MouseEvent) => {

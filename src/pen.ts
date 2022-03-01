@@ -5,6 +5,9 @@ import Command from "./command/Command";
 
 
 export class Pen {
+    get show(): boolean {
+        return this._show;
+    }
     private type: GraphType = GraphType.base
     private penStatus: PenStatus = PenStatus.up
     private moveEvt!: MouseEvent
@@ -13,10 +16,19 @@ export class Pen {
     private currentDrawModel: ModelBase | null = null
     private color: string = '#000000'
     private strokeWith: string = '3'
+    private _show: boolean = true
     private currentPoint: PointModel | undefined
 
     setPenType(type: GraphType) {
         this.type = type
+    }
+
+    hidePen() {
+        this._show = false
+    }
+
+    showPen() {
+        this._show = true
     }
 
     setPenStrokeWith(v: string) {
@@ -57,12 +69,14 @@ export class Pen {
     getPenInfo(): PenInfo {
         const point = this.currentPoint?.toData()
         return {
+            show: this._show,
             x: this.moveEvt ? this.moveEvt.offsetX : 0,
             y: this.moveEvt ? this.moveEvt.offsetY : 0,
             status: this.penStatus,
             color: this.color,
             type: this.type,
             strokeWith: this.strokeWith
+            // show：true
         }
     }
 

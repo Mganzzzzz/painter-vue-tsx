@@ -7,6 +7,8 @@ import {renderGraph} from "./components/dymanicComponent";
 import {GraphType} from "./const";
 import logo from './assets/logo.png'
 import {CanvasPainter} from "./components/CanvasPainter";
+import {Cursor} from "./components/Cursor";
+import useCursor from "./hooks/curosrHook";
 
 export default defineComponent({
     setup() {
@@ -16,8 +18,9 @@ export default defineComponent({
             updateCanvasStyle,
         } = useCanvas()
 
+        const{cursorData, showCursor, startLineCursor} = useCursor(graphList)
 
-        const grapMenuProps: GraphMenuProp = useGraphMenu(graphType, graphList)
+        const grapMenuProps = useGraphMenu(graphType, graphList)
 
         const penStyles = reactive({
             cursor: `url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAhElEQVR42u3WwQ6AIAwDUPj/j1ZInOkR24KBbDc52Ndx0Fp+npqABCTgGMDV5n1pm6WAHo6Z3TKKkAERDgso8TyC2BuAqw/Al3Ab4AnE8/kAdfV2AF7FdICrvQ3AtqcAzvYSABrT7WUAnFHhFoASLgPUcAngCKcAgLB8ys/5I0pAArYF3BnMjyGREgE3AAAAAElFTkSuQmCC'), crosshair;`,
@@ -35,12 +38,14 @@ export default defineComponent({
                 <div class="header">
                     <GraphMenu
                         {...grapMenuProps}
+                        startLineCursor={startLineCursor}
                     />
                 </div>
                 <div class="body">
                     <div class="main">
                         <div class="left-side">
                         </div>
+                        {showCursor.value && <Cursor {...cursorData.value} />}
                         <div class="right-side">
                             {/*<CanvasPainter*/}
                             {/*    graphList={graphList}*/}

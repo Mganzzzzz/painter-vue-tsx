@@ -5,9 +5,9 @@ import {ModelBase} from "../model";
 
 export default class CommandDraw extends Command {
 
-    private type: GraphType
-    private pen: Pen
-    private event: MouseEvent
+    protected type: GraphType
+    protected pen: Pen
+    protected event: MouseEvent
 
     private _snapshotBeforeExec: ModelBase[] = []
     private _snapshotAfterExec: ModelBase[] = []
